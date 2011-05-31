@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:gravity="center"
+	android:orientation="vertical">
+	
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:id="@+id/AddRule"
+		android:text="Add Rule"></Button>
+
+	<LinearLayout
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center"
+	android:orientation="horizontal">			
+		<Button 
+			android:layout_width="100px"
+			android:layout_height="wrap_content" 
+			android:id="@+id/GTGStart"
+			android:text="GTG Start"></Button>
+			
+		<Button 
+			android:layout_width="100px"
+			android:layout_height="wrap_content" 
+			android:text="GTG Stop"
+			android:id="@+id/GTGStop"></Button>
+	</LinearLayout>
+	<LinearLayout
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center"
+	android:orientation="horizontal">				
+		<Button 
+			android:layout_width="100px"
+			android:layout_height="wrap_content" 
+			android:id="@+id/GEHStart"
+			android:text="GEH Start"></Button>
+			
+		<Button 
+			android:layout_width="100px"
+			android:layout_height="wrap_content" 
+			android:text="GEH Stop"
+			android:id="@+id/GEHStop"></Button>
+	</LinearLayout>
+</LinearLayout>

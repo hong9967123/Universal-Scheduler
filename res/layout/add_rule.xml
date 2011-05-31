@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical">
+  
+
+<TextView 
+	android:text="Trigger" 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+</TextView>
+
+<EditText 
+	android:id="@+id/trigger" 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:imeOptions="actionNext|flagNoEnterAction"
+	android:inputType="text">
+</EditText>
+<TextView 
+	android:text="Event" 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+</TextView>
+
+<EditText 
+	android:id="@+id/event" 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:imeOptions="actionNext|flagNoEnterAction"
+	android:inputType="text">
+</EditText>
+
+<Button 
+	android:text="Add Rule" 
+	android:id="@+id/addRule" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:onClick="add"
+>
+
+</Button>
+</LinearLayout>
