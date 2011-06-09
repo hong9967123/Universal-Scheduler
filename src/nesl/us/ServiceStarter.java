@@ -22,7 +22,7 @@ public class ServiceStarter extends TabActivity{
 	    Intent intent;  					// Reusable Intent for each
 	    
 	    // Create an Intent to launch an Activity for the tab (to be reused)
-	    intent = new Intent().setClass(this, RulesActivity.class);
+	    intent = new Intent().setClass(this, TriggersActivity.class);
 	    
 	    // Initialize a TabSpec for each tab and add it to the TabHost
 	    spec = tabhost.newTabSpec("Rules");

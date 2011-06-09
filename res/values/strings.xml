@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="trigger_name_prompt">Select an Event</string>
+    <string name="trigger_value_prompt">Select Event Value</string>
+    <string name="action_name_prompt">Select an Action</string>
     
+    <string-array name="trigger_name_array">
+        <item>locationChange</item>
+        <item>GPS</item>
+        <item>bluetooth</item>
+        <item>power</item>
+        <item>airplaneMode</item>
+        <item>answer</item>
+        <item>headset</item>
+        <item>call</item>
+        <item>screen</item>
+    </string-array>
+    
+    <string-array name="trigger_value_array">
+        <item>on</item>
+        <item>off</item>
+    </string-array>
+    
+    <string-array name="action_name_array">
+        <item>toast</item>
+        <item>sound</item>
+    </string-array>
 </resources>

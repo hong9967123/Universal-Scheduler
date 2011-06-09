@@ -5,35 +5,6 @@
   android:layout_height="fill_parent"
   android:orientation="vertical">
   
-
-<TextView 
-	android:text="Trigger Name" 
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
-</TextView>
-
-<Spinner 
-    android:id="@+id/trigger_name"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:prompt="@string/trigger_name_prompt"
->
-</Spinner>
-
-<TextView 
-	android:text="Trigger Value" 
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
-</TextView>
-
-<Spinner 
-    android:id="@+id/trigger_value"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:prompt="@string/trigger_value_prompt"
->
-</Spinner>
-
 <TextView 
 	android:text="Action Name" 
 	android:layout_width="fill_parent"
@@ -63,8 +34,8 @@
 </EditText>
 
 <Button 
-	android:text="Add Rule" 
-	android:id="@+id/addRule" 
+	android:text="Add Action" 
+	android:id="@+id/addAction" 
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content"
 	android:onClick="add"

@@ -1,84 +1,138 @@
 package nesl.us;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 public class Rules {
 	// Internal representation of rules
-	private HashMap<String,List<Rule>> rules;
-	private OutputStream out;
+	private HashMap<Event,List<Rule>> rules;
+	//private OutputStream out;
 	
 	// Default constructor, empty for now
 	public Rules()
 	{
-		rules = new HashMap<String,List<Rule>>();
+		rules = new HashMap<Event,List<Rule>>();
 	}
 	
+	/*
 	public void setOutFile(OutputStream outFile)
 	{
 		out = outFile;
 	}
+	*/
 	
 	// public interface to retrieve rules
-	public List<Rule> get(String trigger)
+	public List<Rule> get(Event trigger)
 	{
 		return rules.get(trigger);
 	}
 	
-	public Set<String> keySet()
+	public Set<Event> keySet()
 	{
 		return rules.keySet();
 	}
 	
-	public void removeRule(String trigger, Rule rule)
+	// Remove a rule from the data base
+	public void removeRule(Rule rule)
 	{
-		List<Rule> tl = rules.get(trigger);
+		List<Rule> tl = rules.get(rule.getTrigger());
 		tl.remove(rule);
 		if (tl.isEmpty())
 		{
-			rules.remove(trigger);
+			rules.remove(rule.getTrigger());
 		}
 		
 	}
 	
-	public void removeEvent(String trigger, String event)
+	// Remove all action under the trigger
+	public void removeAction(Event trigger, Action action)
 	{
-		for (Rule r : rules.get(trigger))
+		Iterator<Rule> iter = rules.get(trigger).iterator();
+		while (iter.hasNext())
 		{
-			r.removeEvent(event);
+			Rule r = iter.next();
+			r.removeAction(action);
 			if (!r.valid())
 			{
-				removeRule(trigger,r);
+				iter.remove();
+				removeRule(r);
 			}
 		}
 	}
 	
+	public void removeAction(Event trigger, String actionName, int ruleNum)
+	{
+		Iterator<Rule> iter = rules.get(trigger).iterator();
+		while (iter.hasNext())
+		{
+			Rule r = iter.next();
+			if (r.getID() == ruleNum)
+			{
+				r.removeAction(actionName);
+				if (!r.valid())
+				{
+					iter.remove();
+					removeRule(r);
+				}		
+			}
+		}
+	}
+	
+	public void addAction(Event trigger, Action action, int ruleNum)
+	{
+		for(Rule r : rules.get(trigger))
+		{
+			if (r.getID() == ruleNum)
+			{
+				r.addAction(action);
+				return;
+			}
+		}
+	}
+	
+	public void addCondition(Event trigger, Event condition, int ruleNum)
+	{
+		for(Rule r : rules.get(trigger))
+		{
+			if (r.getID() == ruleNum)
+			{
+				r.addCondition(condition);
+				return;
+			}
+		}
+	}	
+	
+	public void removeCondition(Event trigger, String conditionName, int ruleNum)
+	{
+		Iterator<Rule> iter = rules.get(trigger).iterator();
+		while (iter.hasNext())
+		{
+			Rule r = iter.next();
+			if (r.getID() == ruleNum)
+			{
+				r.removeCondition(conditionName);
+				break;
+			}
+		}		
+	}
+	
 	// Add a rule with the given parameters
-	public void addRule(String trigger,Set<String> states, String event)
+	public void addRule(Event trigger,Set<Event> conditions, Action action)
 	{
 		// Create a new Rule and populate it
 		Rule lc = new Rule(trigger);
 		
 		// Add the event
-		lc.addEvent(event);
-
+		lc.addAction(action);
 		
-		if(states != null)
+		if(conditions != null)
 		{
-			for (String s: states)
+			for (Event cond: conditions)
 			{
-				lc.addState(s);
+				lc.addCondition(cond);
 			}		
 		}
 		
@@ -94,7 +148,8 @@ public class Rules {
 
 	}
 	
-	// Add the rules corresponding to this element
+	/*
+	// XML no longer used: Add the rules corresponding to this element
 	public void addRule(Element r)
 	{
 		// Parse Trigger String
@@ -138,7 +193,8 @@ public class Rules {
 			addRule(trigger,states,e);
 		}
 	}
-	
+
+	// XML no longer used: parse a file and add it to the database
 	public void parseRules(InputStream inFile)
 	{
 		InputSource is = new InputSource(inFile);
@@ -222,4 +278,5 @@ public class Rules {
 			e.printStackTrace();
 		}
 	}
+	*/
 }

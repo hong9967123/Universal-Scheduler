@@ -7,13 +7,13 @@
   
 
 <TextView 
-	android:text="Trigger Name" 
+	android:text="Condition Name" 
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
 </TextView>
 
 <Spinner 
-    android:id="@+id/trigger_name"
+    android:id="@+id/condition_name"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:prompt="@string/trigger_name_prompt"
@@ -21,50 +21,22 @@
 </Spinner>
 
 <TextView 
-	android:text="Trigger Value" 
+	android:text="Condition Value" 
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
 </TextView>
 
 <Spinner 
-    android:id="@+id/trigger_value"
+    android:id="@+id/condition_value"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:prompt="@string/trigger_value_prompt"
 >
 </Spinner>
 
-<TextView 
-	android:text="Action Name" 
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
-</TextView>
-
-<Spinner 
-    android:id="@+id/action_name"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:prompt="@string/action_name_prompt"
->
-</Spinner>
-
-<TextView 
-	android:text="Action Value" 
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
-</TextView>
-
-<EditText 
-	android:id="@+id/action_value" 
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:imeOptions="actionNext|flagNoEnterAction"
-	android:inputType="text">
-</EditText>
-
 <Button 
-	android:text="Add Rule" 
-	android:id="@+id/addRule" 
+	android:text="Add Condition" 
+	android:id="@+id/addCondition" 
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content"
 	android:onClick="add"

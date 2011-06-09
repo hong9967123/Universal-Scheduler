@@ -1,5 +1,6 @@
 package nesl.us;
 
+import java.util.ArrayList;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,18 +21,33 @@ public class RulesActivity extends ListActivity {
 		// Display the list
 		display();
 		
+	    String triggerName = getIntent().getStringExtra("triggerName");	    
+	    String triggerValue = getIntent().getStringExtra("triggerValue");	  
+	    setTitle("[" + triggerName + ":" + triggerValue + "] Rules");
+		
 		ListView lv = getListView();
 		lv.setTextFilterEnabled(true);
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+			    String triggerName = getIntent().getStringExtra("triggerName");	    
+			    String triggerValue = getIntent().getStringExtra("triggerValue");	
 				Intent i = new Intent(getApplicationContext(),RuleActivity.class);
-				i.putExtra("trigger", ((TextView) view).getText());
+				i.putExtra("triggerName", triggerName);
+				i.putExtra("triggerValue", triggerValue);
+				i.putExtra("ruleNum", Integer.parseInt(((TextView) view).getText().toString()));
 				startActivity(i);
 			}
 		});
 	}
+	
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		display();
+	}	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,6 +84,18 @@ public class RulesActivity extends ListActivity {
 	
 	private void display()
 	{
-		setListAdapter(new ArrayAdapter<String>(this, R.layout.rule, CoreService.rules.keySet().toArray(new String[0])));
+		ArrayList<String> rules = new ArrayList<String>();
+	    String triggerName = getIntent().getStringExtra("triggerName");	    
+	    String triggerValue = getIntent().getStringExtra("triggerValue");	  
+		Event trigger = new Event(triggerName, triggerValue);
+		if (CoreService.rules.get(trigger) != null)
+		{
+			for (Rule r : CoreService.rules.get(trigger))
+			{
+				rules.add(r.getID() + "");
+			}
+		}
+		
+		setListAdapter(new ArrayAdapter<String>(this, R.layout.rule, rules.toArray(new String[0])));
 	}
 }

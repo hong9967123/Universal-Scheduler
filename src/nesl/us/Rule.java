@@ -1,67 +1,97 @@
 package nesl.us;
 
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import android.os.Bundle;
+
 
 public class Rule {
-	private Set<String> states;
-	private Set<Event> events;
-	private Bundle bundle;
-	private String trigger;
+	private Set<Event> conditions;
+	private Set<Action> actions;
+	private Event trigger;
+	private int ID;
+	private static int num = 0;
 	
-	public Rule(String trg)
+	public Rule(Event trg)
 	{
+		ID = num;
+		num ++;
 		trigger = trg;
-		states = new LinkedHashSet<String>();
-		events = new LinkedHashSet<Event>();
-		bundle = new Bundle();
+		conditions = new LinkedHashSet<Event>();
+		actions = new LinkedHashSet<Action>();
 	}
 	
+	public int getID()
+	{
+		return ID;
+	}
+	
+	// Check if we actually have actions corresponding to this rule
 	public boolean valid()
 	{
-		return events.size() > 0;
+		return actions.size() > 0;
 	}
 	
-	public Bundle getBundle()
+	// Add a new action to be performed when this rule is detected
+	public void addAction(Action a)
 	{
-		return bundle;
+		actions.add(a);
 	}
 	
-	public void addEvent(Event e)
+	// Add a new condition that needs to be satisfied for the actions to fire
+	public void addCondition(Event e)
 	{
-		events.add(e);
+		conditions.add(e);
 	}
 	
-	public void addEvent(String e)
+	// Remove an action
+	public void removeAction(Action a)
 	{
-		events.add(new Event(e));
+		actions.remove(a);
 	}
 	
-	public void addState(String s)
+	// Remove an action by name
+	public void removeAction(String actionName)
 	{
-		states.add(s);
+		Iterator<Action> iter = actions.iterator();
+		while (iter.hasNext())
+		{
+			if (iter.next().name.equals(actionName))
+				iter.remove();
+		}
 	}
 	
-	public void removeEvent(String e)
+	// Remove a condition
+	public void removeCondition(Event e)
 	{
-		events.remove(e);
+		conditions.remove(e);
 	}
 	
-	public void removeState(String s)
+	// Remove a condition
+	public void removeCondition(String conditionName)
 	{
-		events.remove(s);
+		Iterator<Event> iter = conditions.iterator();
+		while (iter.hasNext())
+		{
+			if (iter.next().name.equals(conditionName))
+				iter.remove();
+		}
+	}	
+	
+	public Set<Event> getConditions()
+	{
+		return conditions;
 	}
 	
-	public Set<String> getStates()
+	public Set<Action> getActions()
 	{
-		return states;
+		return actions;
 	}
 	
-	public Set<Event> getEvents()
+	public Event getTrigger()
 	{
-		return events;
+		return trigger;
 	}
 	
 	public String toString()
@@ -73,16 +103,16 @@ public class Rule {
 
 		
 		output += "\t\t<States>\n";
-		for (String state : states)
+		for (Event condition : conditions)
 		{
-			output += "\t\t\t<State>" + state + "</State>\n";
+			output += "\t\t\t<State>" + condition.name + "</State>\n";
 		}
 		output += "\t\t</States>\n";
 		
 		output += "\t\t<Events>\n";
-		for (Event event : events)
+		for (Action action: actions)
 		{
-			output += "\t\t\t<Event>" + event + "</Event>\n";
+			output += "\t\t\t<Event>" + action.name + "</Event>\n";
 		}
 		output += "\t\t</Events>\n";
 		

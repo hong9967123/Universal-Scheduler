@@ -1,40 +1,27 @@
 package nesl.us;
 
-import android.os.Bundle;
-
 public class Event {
-	private String eventName;
-	private Bundle bundle;
+	public String name;
+	public String value;
 	
-	public Event(String eName, Bundle bun)
+	public Event(String n, String v)
 	{
-		eventName = eName;
-		bundle = bun;
+		name = n;
+		value = v;
 	}
 	
-	public Event(String eName)
+	// Two events are equal if they have the same name and value
+	public boolean equals(Object other)
 	{
-		eventName = eName;
-		bundle = new Bundle();
+		if (other instanceof Event)
+				return ((Event) other).name.equals(name) && ((Event) other).value.equals(value);
+		return false;
 	}
 	
-	public Bundle getBundle()
+	// Naive hashCode function, may consider improving to a better algorithm
+	public int hashCode()
 	{
-		return bundle;
+		return name.hashCode() + value.hashCode();
 	}
 	
-	public String getEvent()
-	{
-		return eventName;
-	}
-	
-	public void setEvent(String event)
-	{
-		eventName = event;
-	}
-	
-	public String toString()
-	{
-		return eventName;
-	}
 }

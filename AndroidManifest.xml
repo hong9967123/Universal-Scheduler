@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="nesl.us"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <application android:icon="@drawable/icon" android:label="Universal Scheduler" android:debuggable="true">
+	    
+	    <activity android:name=".ServiceStarter" android:label="Service Starter">
+	      <intent-filter>
+	        <action android:name="android.intent.action.MAIN" />
+	        <category android:name="android.intent.category.LAUNCHER" />
+	      </intent-filter>
+	    </activity>
+	    
+		<activity android:name=".TriggersActivity"></activity>	      
+	   	<activity android:name=".RuleActivity"></activity>	  
+	   	<activity android:name=".ActionsActivity"></activity>	  
+	    <activity android:name=".ConditionsActivity"></activity>	
+	   	<activity android:name=".RulesActivity"></activity>
+	   	<activity android:name=".SettingsActivity"></activity>	    
+	   	<activity android:name=".AddRuleActivity"></activity>	
+	   	<activity android:name=".AddActionActivity"></activity>	
+	   	<activity android:name=".AddConditionActivity"></activity>		   		   	      
+		<service android:name=".CoreService"></service>
+		
+		<service android:name=".GTG.GTG">
+			<intent-filter>
+				<action android:name="nesl.us.GTG.trigger" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</service>	
+		
+		<service android:name=".GEH.GEH">
+			<intent-filter>
+				<action android:name="nesl.us.GEH.trigger" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</service>	
+			
+    </application>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission> 
+  	<uses-permission android:name="android.permission.BLUETOOTH" />
+  	<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+
+</manifest> 
